@@ -1,2 +1,2 @@
-export * as r from './util';
+export { make } from './util';
 export * from './defs';

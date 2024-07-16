@@ -2,7 +2,9 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import ReactDOM from 'react-dom/client';
 import { routeTree } from './routeTree.gen';
 import './assets/fonts/libertinus/libertinus.css';
+import './assets/fonts/stix-two/stix-two.css';
 import 'virtual:uno.css';
+import '@unocss/reset/tailwind.css';
 
 const router = createRouter({ routeTree, defaultPreload: 'intent' });
 

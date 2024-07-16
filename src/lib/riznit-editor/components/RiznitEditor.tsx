@@ -1,12 +1,12 @@
-import type { c } from '@/lib/riznit-engine';
-import type { z } from 'zod';
+import type { c, Selection } from '@/lib/riznit-engine';
 import { PropNode } from './prop';
 
 interface Props {
-	prop: z.output<typeof c.prop.schema>;
+	prop: typeof c.prop._ty;
+	selection: Selection | null;
 }
-export const RiznitEditor = ({ prop }: Props) => (
-	<main font-math text-16>
-		<PropNode prop={prop} />
+export const RiznitEditor = ({ prop, selection }: Props) => (
+	<main font-math text-16 px-4 py-2>
+		<PropNode prop={prop} selection={selection} />
 	</main>
 );

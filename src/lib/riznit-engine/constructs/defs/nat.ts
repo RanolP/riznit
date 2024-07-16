@@ -1,10 +1,4 @@
 import { z } from 'zod';
-import { r } from '..';
+import { make } from '..';
 
-export const nat = r.struct(
-	'nat',
-	{
-		value: z.number(),
-	},
-	{},
-);
+export const nat = make('nat', z.number(), (value: number) => value);

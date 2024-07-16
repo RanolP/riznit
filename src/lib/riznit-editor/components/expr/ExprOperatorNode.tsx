@@ -1,12 +1,21 @@
-import type { c } from '@/lib/riznit-engine';
+import { isSelected, type c, type Selection } from '@/lib/riznit-engine';
 import { match } from 'ts-pattern';
-import type { z } from 'zod';
+import { MathFragment } from '../MathFragment';
+import type { PropsWithUno } from '@/lib/types';
 
 interface Props {
-	exprOperator: z.output<typeof c.exprOperator.schema>;
+	exprOperator: typeof c.exprOperator._ty;
+	selection: Selection | null;
 }
-export const ExprOperatorNode = ({ exprOperator }: Props) =>
-	match(exprOperator.properties.kind)
-		.with('add', () => <span>+</span>)
-		.with('subtract', () => <span>-</span>)
-		.exhaustive();
+export const ExprOperatorNode = ({
+	exprOperator,
+	selection,
+	...props
+}: PropsWithUno<Props>) => (
+	<MathFragment isSelected={isSelected(selection, 0)} {...props}>
+		{match(exprOperator.value)
+			.with('add', () => '+')
+			.with('subtract', () => '-')
+			.exhaustive()}
+	</MathFragment>
+);

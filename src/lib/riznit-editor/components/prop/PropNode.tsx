@@ -1,15 +1,19 @@
-import type { z } from 'zod';
-import { c } from '@/lib/riznit-engine';
+import { c, propagate } from '@/lib/riznit-engine';
 import { match } from 'ts-pattern';
 import { PropExprEqExprNode } from './PropExprEqExprNode';
+import type { Selection } from '@/lib/riznit-engine';
 
 interface Props {
-	prop: z.output<typeof c.prop.schema>;
+	prop: typeof c.prop._ty;
+	selection: Selection | null;
 }
 
-export const PropNode = ({ prop }: Props): JSX.Element =>
-	match(prop.variant)
+export const PropNode = ({ prop, selection }: Props): JSX.Element =>
+	match(prop.value)
 		.with(c.propExprEqExpr.match, (propExprEqExpr) => (
-			<PropExprEqExprNode propExprEqExpr={propExprEqExpr} />
+			<PropExprEqExprNode
+				propExprEqExpr={propExprEqExpr}
+				selection={propagate(selection, 0)}
+			/>
 		))
 		.exhaustive();

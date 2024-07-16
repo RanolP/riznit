@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "STIX Two Math";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("STIX Two Math"),
+    url("./STIXTwoMath-Regular.woff2") format("woff2");
+}

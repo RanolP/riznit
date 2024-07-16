@@ -1,20 +1,32 @@
 import { z } from 'zod';
-import { r } from '..';
 import { term } from './term';
+import { match } from 'ts-pattern';
+import { make } from '../util';
 
-export const exprOperator = r.struct(
+export const exprOperator = make(
 	'expr/operator',
-	{
-		kind: z.union([z.literal('add'), z.literal('subtract')]),
-	},
-	{},
+	z.enum(['add', 'subtract']),
+
+	(operator: '+' | '-') =>
+		match(operator)
+			.with('+', () => 'add' as const)
+			.with('-', () => 'subtract' as const)
+			.exhaustive(),
 );
 
-export const expr = r.struct(
+export const expr = make(
 	'expr',
-	{
+	z.object({
 		mostLeft: term.schema,
 		operations: z.array(z.tuple([exprOperator.schema, term.schema])),
+	}),
+	(
+		mostLeft: typeof term._ty,
+		...operations: Array<[typeof exprOperator._ty, typeof term._ty]>
+	) => {
+		return {
+			mostLeft,
+			operations,
+		};
 	},
-	{},
 );

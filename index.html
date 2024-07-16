@@ -1,13 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script type="module">
+      import { applyTheme } from "/src/features/theme";
+
+      applyTheme();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>riznit</title>
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="w-[100dvw] h-[100dvh] overflow-hidden text-1 bg-1">
+    <div id="root" class="w-full h-full overflow-auto"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
