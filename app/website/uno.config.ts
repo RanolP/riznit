@@ -31,15 +31,11 @@ const Palette = {
 export default defineConfig({
 	theme: {
 		fontFamily: {
-			math: [
-				"Web Computer Modern Math Serif",
-				"Libertinus Math",
-				"STIX Two Math",
-			]
+			math: ["WebCM Math Serif", "Libertinus Math", "STIX Two Math"]
 				.map((s) => JSON.stringify(s))
 				.join(", "),
-			"web-cm": "'Web Computer Modern Serif 10'",
-			"math-web-cm": "'Web Computer Modern Math Serif'",
+			"web-cm": "'WebCM Serif 10'",
+			"math-web-cm": "'WebCM Math Serif'",
 			"math-libertinus": "'Libertinus Math'",
 			"math-stix-two": "'STIX Two Math'",
 		},
